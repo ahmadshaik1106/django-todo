@@ -1,0 +1,27 @@
+{% extends 'todo/main.html' %}
+
+{% block content %}
+<div class="container">
+        <div class="row">
+            <div class="card">
+
+                <div class="card-content">
+                    <span class="card-title">Login</span>
+                    <div class="row">
+
+                            <form action="" method="POST" id='taskForm'>{% csrf_token %}
+                                
+                                <input type="text" name="username" placeholder="Username...">
+                                <input type="password" name="password" placeholder="Password..." >
+                                <input type="submit" value="Login">
+
+                            </form>
+                            
+                    </div>
+                </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,28 @@
+{% extends 'todo/main.html' %}
+{% load materializecss %}
+{% load crispy_forms_tags %}
+<!-- {{form.as_p}} -->
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="card">
+
+            <div class="card-content">
+                <span class="card-title"><legend><strong>Sign Up</strong></legend></span>
+                <div class="row">
+
+                        <form action="" method="POST" id='taskForm'>{% csrf_token %}
+                            
+                            {{ form | crispy }}
+                          
+                        
+                            <input type="submit" value="Register" class="btn block col s12" style="margin-bottom: 15px;margin-top: 10px;">
+                        </form>
+                        Already have an account?<a href="{% url 'login' %}"style="margin-left: 5px;">Login Here</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% include 'todo/footer.html' %}
+{% endblock %}
+

@@ -1,0 +1,16 @@
+{% load static %}
+
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper teal">
+      <a href="#!" class="brand-logo left"><img src="{% static 'images/logo.png'%}" style="height: 60px;"></a>
+      <ul class="right">
+        {% if user.is_authenticated %}
+        <li style="font-size: large;">Hello,{{ request.user }} </li>
+        <li><a href="{% url 'logout' %}"  style="font-size: large;">Logout</a></li>
+        <li><a href="{% url 'delete_account' request.user.id %}"  style="font-size: large;">Delete account</a></li>
+        {% endif %}
+      </ul>
+    </div>
+  </nav>
+</div>

@@ -1,0 +1,67 @@
+{% extends 'todo/main.html' %}
+{% load materializecss %}
+{% block content %}
+
+    <div class="container">
+        <div class="row">
+            <div class="card">
+               <div class="card-content">
+                    <span class="card-title">Task List</span>
+                    <div class="row">
+                            <form action="" method="POST" id='taskForm'>{% csrf_token %}
+                                
+                                {{ form.name }}
+                            
+                                <input type="submit" value="Add Task" class="btn">
+                            </form>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <h5>Tasks</h5>
+
+                    {% if tasks %}
+                       
+                        <div class="input-field col s12">
+                            <input type="text" name='filter' id='filter'>
+                            <label for="filter">Filter Task</label>
+                        </div>
+                        <ul class="collection">
+                            {% for task in tasks %}
+                                <li class="collection-item"> {{ task.name }}   <br> ({{ task.time_added }})
+                                    
+                                    <a href="{% url 'delete_task' user.id task.id  %}" class="delete-item secondary-content">
+                                        <span class='fa fa-remove'></span></a>
+                                    <a href="{% url 'update' user.id task.id %}" class="delete-item secondary-content">
+                                        <span class='fa fa-pencil'></span></a>
+                                    
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    <a href="{% url 'delete_all_tasks' user.id %}" class="clear-tasks btn orange accent-4">clear Tasks</a>
+                    {% else %}
+                            <p>No Tasks</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const filter = document.querySelector('#filter')
+        filter.addEventListener('keyup',filterTasks)
+    
+    function filterTasks(e){
+    const text = e.target.value.toLowerCase();
+    
+    document.querySelectorAll('.collection-item').forEach(function (task){
+        const item = task.firstChild.textContent;
+        if(item.toLowerCase().indexOf(text)!=-1){
+            task.style.display = 'block';
+        }else{
+            task.style.display = 'none';
+        }
+    });
+    
+    }
+    </script>
+    <div class="container">{% include 'todo/footer.html' %}</div>
+{% endblock %}
